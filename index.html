@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Saksi ng Langit Proposal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      width: 100%;
+      height: 100%;
+      background-color: black;
+      transition: background-color 2s ease;
+      font-family: 'Poppins', sans-serif;
+      overflow: hidden;
+      color: white;
+    }
+    #clickBox {
+      background-color: red;
+      color: white;
+      padding: 20px 40px;
+      font-size: 24px;
+      font-weight: bold;
+      border-radius: 12px;
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 10;
+    }
+    #lyricsContainer {
+      position: absolute;
+      top: 20%;
+      width: 100%;
+      text-align: center;
+      font-size: 2.5vw;
+      font-weight: bold;
+      color: black;
+      z-index: 5;
+    }
+    .lyric-line {
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      margin-bottom: 10px;
+    }
+    #typewriter {
+      position: absolute;
+      bottom: 5%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 2vw;
+      max-width: 90%;
+      text-align: center;
+      color: black;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 2px solid black;
+      animation: blink 1s step-end infinite;
+    }
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="clickBox" onclick="startPresentation()">Click Here</div>
+
+  <audio id="bgMusic" preload="auto">
+    <source src="saksi-ng-langit.mp3" type="audio/mpeg">
+  </audio>
+
+  <audio id="typeSound" preload="auto">
+    <source src="typewriter-key.mp3" type="audio/mpeg">
+  </audio>
+
+  <div id="lyricsContainer">
+    <div class="lyric-line" id="line1">Nangangarap lang</div>
+    <div class="lyric-line" id="line2">Habang ika'y pinagmamasdan</div>
+    <div class="lyric-line" id="line3">Nagbibilang ng iyong hakbang</div>
+    <div class="lyric-line" id="line4">Hanggang ika’y aking mahagkan</div>
+    <div class="lyric-line" id="line5">‘Di sasayangin ang oras sa pag-ibig mo</div>
+    <div class="lyric-line" id="line6">Mas pipiliin ko</div>
+    <div class="lyric-line" id="line7">Ibigay lahat pati itong aking mundo</div>
+    <div class="lyric-line" id="line8">Halika't sumayaw sa ilalim ng bituin</div>
+    <div class="lyric-line" id="line9">Habang ako’y nakatingin sa'yo</div>
+    <div class="lyric-line" id="line10">Wala na'kong ibang mahihiling</div>
+    <div class="lyric-line" id="line11">Saksi ang langit sa'tin</div>
+    <div class="lyric-line" id="line12">'Wag kang magtaka</div>
+    <div class="lyric-line" id="line13">Kung bakit tayo pinag-isa</div>
+    <div class="lyric-line" id="line14">'Wag kanang kabahan</div>
+    <div class="lyric-line" id="line15">Ito'y hindi panaginip lang</div>
+    <div class="lyric-line" id="line16">‘Di gumagalaw ang oras sa paligid ko</div>
+    <div class="lyric-line" id="line17">Pati itong mundo’y</div>
+    <div class="lyric-line" id="line18">Tumitigil habang ako’y nasa tabi mo</div>
+    <div class="lyric-line" id="line19">Halika't sumayaw sa ilalim ng bituin</div>
+    <div class="lyric-line" id="line20">Habang ako’y nakatingin sa'yo</div>
+    <div class="lyric-line" id="line21">Wala na'kong ibang mahihiling</div>
+    <div class="lyric-line" id="line22">Saksi ang langit sa'tin</div>
+    <div class="lyric-line" id="line23">Oh-oh, oh-oh-oh</div>
+    <div class="lyric-line" id="line24">Saksi ang langit</div>
+    <div class="lyric-line" id="line25">Saksi ang langit sa’tin</div>
+    <div class="lyric-line" id="line26">Saksi ang langit</div>
+    <div class="lyric-line" id="line27">Saksi ang langit sa’tin</div>
+    <div class="lyric-line" id="line28">Halika't sumayaw sa ilalim ng bituin</div>
+    <div class="lyric-line" id="line29">Habang ako’y nakadikit sa'yo</div>
+    <div class="lyric-line" id="line30">Wala na'kong ibang mahihiling</div>
+    <div class="lyric-line" id="line31">Saksi ang langit</div>
+  </div>
+
+  <div id="typewriter"></div>
+
+  <script>
+    function startPresentation() {
+      document.body.style.backgroundColor = "white";
+      const box = document.getElementById("clickBox");
+      box.style.opacity = 0;
+      setTimeout(() => box.remove(), 1000);
+
+      const music = document.getElementById("bgMusic");
+      music.play();
+
+      const message = "Sa pamamagitan ng kantang ito ay nais kong ipakita ang aking pag-ibig sa iyo.";
+      const display = document.getElementById("typewriter");
+      const typeSound = document.getElementById("typeSound");
+      let i = 0;
+      function typeLetter() {
+        if (i < message.length) {
+          display.textContent += message.charAt(i);
+          if (message.charAt(i) !== " ") {
+            typeSound.currentTime = 0;
+            typeSound.play();
+          }
+          i++;
+          setTimeout(typeLetter, 100);
+        }
+      }
+      setTimeout(typeLetter, 1000);
+
+      const start = 22000;
+      const spacing = [
+        1000, 4000, 4000, 6000,  // line5 delayed by 2s here
+        3500, 3500,
+        5000, 4000, 4000, 4500,
+        5000, 3500, 4000, 4000,
+        5000, 3500, 4000,
+        4500, 4000, 4000, 4000,
+        4000, 3500, 4000, 4000,
+        4500, 4000, 4000, 4000
+      ];
+
+      let total = start;
+      spacing.forEach((gap, index) => {
+        total += gap;
+        setTimeout(() => showLine("line" + (index + 1)), total);
+      });
+
+      function showLine(id) {
+        document.querySelectorAll('.lyric-line').forEach(el => el.style.opacity = 0);
+        const line = document.getElementById(id);
+        if (line) line.style.opacity = 1;
+      }
+
+      setTimeout(() => {
+        document.body.style.backgroundColor = "black";
+        document.getElementById("typewriter").style.color = "white";
+        document.querySelectorAll('.lyric-line').forEach(el => el.style.color = "white");
+      }, 265000);
+    }
+  </script>
+
+</body>
+</html>
+
